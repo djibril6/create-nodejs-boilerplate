@@ -6,7 +6,10 @@ import arg from 'arg';
 import inquirer from 'inquirer';
 
 const templateValues = ["RestAPI", "graphQL"];
-const repo = 'https://github.com/djibril6/create-rest-nodejs-boilerplate.git';
+const repo = {
+  "RestAPI": 'https://github.com/djibril6/restapi-nodejs-boilerplate.git',
+  "graphQL": 'Not yet'
+};
 
 // Utility functions
 const exec = util.promisify(require('child_process').exec);
@@ -89,10 +92,13 @@ function isDirectoryExist(appPath) {
       }
 }
 
-async function setup(appPath, folderName) {
+async function setup(appPath, folderName, options) {
   try {
     // Clone the repo
-    console.log(`Downloading project files from ${repo}`);
+    if (options.template === templateValues[1]) {
+      throw Error(`${options.template} template is not available yet`)
+    }
+    console.log(`Downloading project files from ${repo[options.template]}`);
     await runCmd(`git clone --depth 1 ${repo} ${folderName}`);
     console.log('');
 
@@ -165,5 +171,5 @@ export async function cli(args) {
 
     isDirectoryExist(appPath);
 
-    setup(appPath, folderName);
+    setup(appPath, folderName, options);
 }
