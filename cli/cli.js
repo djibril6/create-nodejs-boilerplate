@@ -120,6 +120,7 @@ async function setup(appPath, folderName, options) {
 
     // Copy envornment variables
     fs.copyFileSync(path.join(appPath, '.env.example'), path.join(appPath, '.env'));
+    fs.unlinkSync(path.join(appPath, '.env.example'));
     console.log('Environment files copied.');
 
     // Delete .git folder
