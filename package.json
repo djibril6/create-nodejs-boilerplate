@@ -1,6 +1,6 @@
 {
   "name": "@djibril6/create-nodejs-boilerplate",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Modular Node.js with typescript boilerplate",
   "bin": {
     "@djibril6/create-nodejs-boilerplate": "bin/create-nodejs-boilerplate.js",

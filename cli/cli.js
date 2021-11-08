@@ -99,7 +99,7 @@ async function setup(appPath, folderName, options) {
       throw Error(`${options.template} template is not available yet`)
     }
     console.log(`Downloading project files from ${repo[options.template]}`);
-    await runCmd(`git clone --depth 1 ${repo} ${folderName}`);
+    await runCmd(`git clone --depth 1 ${repo[options.template]} ${folderName}`);
     console.log('');
 
     // Change directory
@@ -127,10 +127,6 @@ async function setup(appPath, folderName, options) {
     await runCmd('npx rimraf ./.git');
 
     // Remove extra files
-    // fs.unlinkSync(path.join(appPath, 'bin', 'create-nodejs-boilerplate.js'));
-    // fs.rmdirSync(path.join(appPath, 'bin'));
-    // fs.unlinkSync(path.join(appPath, 'cli', 'cli.js'));
-    // fs.rmdirSync(path.join(appPath, 'cli'));
     if (!useYarn) {
       fs.unlinkSync(path.join(appPath, 'yarn.lock'));
     }
