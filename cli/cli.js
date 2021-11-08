@@ -4,12 +4,26 @@ const fs = require('fs');
 const { execSync } = require('child_process');
 import arg from 'arg';
 import inquirer from 'inquirer';
+const ora = require('ora');
+const figlet = require('figlet');
+const chalk = require('chalk');
 
 const templateValues = ["RestAPI", "graphQL"];
 const repo = {
   "RestAPI": 'https://github.com/djibril6/restapi-nodejs-boilerplate.git',
   "graphQL": 'Not yet'
 };
+
+function welcome() {
+  console.log(chalk.blue(figlet.textSync('Create A')))
+  console.log(chalk.blue(figlet.textSync('NodeJS app')))
+  console.log(chalk.blue("\n---------------------------------------------------------"))
+  console.log(chalk.blue("    Created by Djibril ISSOUFOU - github.com/djibril6"))
+  console.log(chalk.blue("---------------------------------------------------------\n"))
+  console.log(chalk.white(`This is a CLI to generate a boilerplate
+  for quick starting a NodeJS app using Express, Typescript
+  and other many commonly used tools to create NodeJS REST or GraphQL APIs. \n`));
+}
 
 // Utility functions
 const exec = util.promisify(require('child_process').exec);
@@ -55,9 +69,20 @@ async function validateArguments(options) {
     const questions = [];
     if (!options.appName) {
       questions.push({
-        type: 'string',
+        type: 'input',
         name: 'appName',
         message: 'Please specify a name for your project',
+        validate: value => {
+          const letterNumber = /^[0-9a-zA-Z]+$/
+    
+          if (!value) {
+            return 'The project name must be provided'
+          } else if (value.includes(' ')) {
+            return 'Your project\'s name cannot have spaces or special chars'
+          }
+    
+          return true;
+        }
       });
     }
 
@@ -98,9 +123,12 @@ async function setup(appPath, folderName, options) {
     if (options.template === templateValues[1]) {
       throw Error(`${options.template} template is not available yet`)
     }
-    console.log(`Downloading project files from ${repo[options.template]}`);
+
+    let spinner = ora(`Downloading project files from ${repo[options.template]}`).start();
+    // console.log(`Downloading project files from ${repo[options.template]}`);
     await runCmd(`git clone --depth 1 ${repo[options.template]} ${folderName}`);
-    console.log('');
+    // console.log('');
+    spinner.stop();
 
     // Change directory
     process.chdir(appPath);
@@ -109,12 +137,14 @@ async function setup(appPath, folderName, options) {
 
     // Install dependencies
     const useYarn = await hasYarn();
-    console.log('Installing dependencies...');
+    // console.log('Installing dependencies...');
+    spinner = ora('Installing dependencies...').start();
     if (useYarn) {
       await runCmd('yarn install');
     } else {
       await runCmd('npm install');
     }
+    spinner.stop();
     console.log('Dependencies installed.');
     console.log();
 
@@ -158,6 +188,7 @@ async function setup(appPath, folderName, options) {
 }
 
 export async function cli(args) {
+  welcome();
     let options = getArguments(args);
     options = await validateArguments(options);
 

@@ -37,7 +37,9 @@
   "homepage": "https://github.com/djibril6/create-nodejs-boilerplate#readme",
   "dependencies": {
     "arg": "^4.1.3",
+    "chalk": "^4.1.2",
     "esm": "^3.2.25",
+    "figlet": "^1.5.2",
     "inquirer": "^8.2.0"
   }
 }
