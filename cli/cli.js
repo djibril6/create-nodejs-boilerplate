@@ -15,10 +15,10 @@ const repo = {
 };
 
 function welcome() {
-  console.log(chalk.blue(figlet.textSync('Create A')))
   console.log(chalk.blue(figlet.textSync('NodeJS app')))
+  console.log(chalk.blue(figlet.textSync('Generator')))
   console.log(chalk.blue("\n---------------------------------------------------------"))
-  console.log(chalk.blue("    Created by Djibril ISSOUFOU - github.com/djibril6"))
+  console.log(chalk.blue("    Author: Djibril ISSOUFOU - github.com/djibril6"))
   console.log(chalk.blue("---------------------------------------------------------\n"))
   console.log(chalk.white(`This is a CLI to generate a boilerplate
   for quick starting a NodeJS app using Express, Typescript
