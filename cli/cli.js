@@ -133,8 +133,6 @@ async function setup(appPath, folderName, options) {
     // Change directory
     process.chdir(appPath);
 
-    fs.unlinkSync(path.join(appPath, 'package-lock.json'));
-
     // Install dependencies
     const useYarn = await hasYarn();
     // console.log('Installing dependencies...');
