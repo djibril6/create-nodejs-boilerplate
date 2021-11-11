@@ -126,7 +126,7 @@ async function setup(appPath, folderName, options) {
 
     let spinner = ora(`Downloading project files from ${repo[options.template]}`).start();
     // console.log(`Downloading project files from ${repo[options.template]}`);
-    await runCmd(`git clone --depth 1 ${repo[options.template]} ${folderName}`);
+    await runCmd(`git clone --depth 1 --branch=main ${repo[options.template]} ${folderName}`);
     // console.log('');
     spinner.stop();
 
