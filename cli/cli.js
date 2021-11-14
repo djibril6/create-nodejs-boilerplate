@@ -11,7 +11,7 @@ const chalk = require('chalk');
 const templateValues = ["RestAPI", "graphQL"];
 const repo = {
   "RestAPI": 'https://github.com/djibril6/restapi-nodejs-boilerplate.git',
-  "graphQL": 'Not yet'
+  "graphQL": 'https://github.com/djibril6/graphql-nodejs-boilerplate.git'
 };
 
 function welcome() {
@@ -120,9 +120,6 @@ function isDirectoryExist(appPath) {
 async function setup(appPath, folderName, options) {
   try {
     // Clone the repo
-    if (options.template === templateValues[1]) {
-      throw Error(`${options.template} template is not available yet`)
-    }
 
     let spinner = ora(`Downloading project files from ${repo[options.template]}`).start();
     // console.log(`Downloading project files from ${repo[options.template]}`);
