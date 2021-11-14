@@ -14,7 +14,8 @@
     "cli/"
   ],
   "scripts": {
-    "test": "echo 'hello world'"
+    "test": "echo 'hello world'",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -41,5 +42,8 @@
     "esm": "^3.2.25",
     "figlet": "^1.5.2",
     "inquirer": "^8.2.0"
+  },
+  "devDependencies": {
+    "husky": "^7.0.0"
   }
 }
